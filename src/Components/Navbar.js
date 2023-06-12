@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { HiMenu } from "react-icons/hi";
 import { HiXMark } from "react-icons/hi2";
 import logo from '../assets/logo.png';
+import AddHabit from './AddHabit.js';
 
 const Navbar = () => {
   let Links = [
     { name: "HOME", link: "/" },
     { name: "ABOUT", link: "/" },
-    { name: "WeekView", link: "/" },
+    { name: "Week View", link: "/" },
   ];
   let [open, setOpen] = useState(false);
   const curr_date = new Date().toDateString();
+  let [showAddhabit, setShowAddHabit] = useState(false);
 
   return (
     <div className='shadow-md w-full fixed top-0 left-0'>
@@ -33,12 +35,17 @@ const Navbar = () => {
                 <a href={link.link} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</a>
               </li>))
           }
-          <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Add Habit</button>
+          <button onClick={() => setShowAddHabit(true)}
+            className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>
+            Add Habit
+          </button>
+
           <li className='md:ml-8 md:my-0 my-7 font-semibold'>
             <span className='text-gray-800 hover:text-blue-400 duration-500'>{curr_date}</span>
           </li>
         </ul>
       </div>
+      <AddHabit show={showAddhabit} onClose={() => setShowAddHabit(false)} />
     </div>
   );
 };

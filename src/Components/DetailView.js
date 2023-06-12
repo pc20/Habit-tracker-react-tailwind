@@ -8,8 +8,8 @@ function DetailView() {
     return (
         <div>
             {
-                habits.map((habits, idx) => (
-                    <HabitCard />
+                habits.map((habit, idx) => (
+                    <HabitCard habit={habit} />
                 ))
             }
         </div>
