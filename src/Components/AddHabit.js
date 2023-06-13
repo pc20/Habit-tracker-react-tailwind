@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addHabit, details } from '../Slices/habitSlice.js'
+import { Link, useNavigate } from 'react-router-dom';
 
 function AddHabit(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { show, onClose } = props;
 
   const [title, setTitle] = useState('')
@@ -13,10 +15,14 @@ function AddHabit(props) {
   const AddHabitHandler = () => {
     dispatch(addHabit({ title, description, details }));
     onClose();
+    navigate('/habits/details', { replace: true });
   }
 
   const handleClose = (e) => {
-    if (e.target.id === 'wrapper') onClose();
+    if (e.target.id === 'wrapper') {
+      onClose();
+      navigate('/habits/details', { replace: true });
+    }
   }
   if (!show) {
     return null;
@@ -37,7 +43,7 @@ function AddHabit(props) {
               focus:ring-blue-500 focus:border-blue-500 w-full p-2.5' placeholder='Enter title' required></input>
               </div>
               <div>
-                <label className=' text-xl'> Description</label>
+                <label className=' text-xl'> Short description</label>
                 <input onChange={(e) => setDescription(e.target.value)} type='text' name='title'
                   className='bg-gray-50 border border-gray-300 text-base rounded-lg
               focus:ring-blue-500 focus:border-blue-500 w-full p-2.5' placeholder='shortly describe'></input>
@@ -47,10 +53,11 @@ function AddHabit(props) {
                 <button onClick={AddHabitHandler} type='submit' className='text-white text-center  bg-blue-400 hover:bg-blue-900
                  focus:ring-4 focus:outline-none rounded-lg px-5 py-2.5'>Add</button>
 
-                <button onClick={onClose} className='text-white text-center  bg-red-400 hover:bg-red-900
+                <Link to={'/habits/details'}>
+                  <button onClick={onClose} className='text-white text-center  bg-red-400 hover:bg-red-900
                  focus:ring-4 focus:outline-none rounded-lg px-5 py-2.5'>Close</button>
+                </Link>
               </div>
-
             </form>
           </div>
         </div>
