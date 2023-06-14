@@ -52,7 +52,7 @@ const Calendar = () => {
     }, []);
 
     return (
-        <div className='flex justify-center items-center flex-row'>
+        <div className='text-white flex justify-center items-center'>
             <div className='w-56 h-72'>
                 <div className="flex justify-center items-center select-none font-semibold gap-2">
                     <FaCalendarAlt />
@@ -62,7 +62,7 @@ const Calendar = () => {
                     {days.map((day, index) => {
                         return (
                             <h1 key={index}
-                                className="text-sm text-center h-10 w-10 grid place-content-center text-black select-none">
+                                className="text-sm text-center h-10 w-10 grid place-content-center select-none">
                                 {day}
                             </h1>
                         );
@@ -78,8 +78,8 @@ const Calendar = () => {
                                 >
                                     <h1
                                         className={
-                                            `  h-6 w-6 rounded-full grid place-content-center hover:bg-black hover:text-white transition-all 
-                                    cursor-pointer select-none ${currentMonth ? "" : "text-slate-300"}
+                                            `  h-6 w-6 rounded-full grid place-content-center hover:bg-blue-600 hover:text-white transition-all 
+                                    cursor-pointer select-none ${currentMonth ? "" : "text-gray-600"}
                                     ${today ? "bg-red-600 text-white" : ""}
                                     ${selectDate.toDate().toDateString() === date.toDate().toDateString()
                                                 ? "bg-black text-white" : ""}`

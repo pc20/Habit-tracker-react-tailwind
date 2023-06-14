@@ -3,11 +3,12 @@ import { HiMenu } from "react-icons/hi";
 import { HiXMark } from "react-icons/hi2";
 import logo from '../assets/logo.png';
 import AddHabit from './AddHabit.js';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   let Links = [
     { name: "HOME", link: "/" },
-    { name: "Week View", link: "/" },
+    { name: "Week View", link: "/habits/week" }
   ];
   let [open, setOpen] = useState(false);
   const curr_date = new Date().toDateString();
@@ -31,16 +32,19 @@ const Navbar = () => {
         <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full 
         md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-15' : 'top-[-490px]'}`}>
           {
-            Links.map((link) => (
-              <li className='md:ml-8 md:my-0 my-7 font-semibold'>
-                <a href={link.link} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</a>
+            Links.map((link, index) => (
+              <li key={index} className='md:ml-8 md:my-0 my-7 font-semibold'>
+                <Link to={link.link}>
+                  <button className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</button>
+                </Link>
               </li>))
           }
-          <button onClick={() => setShowAddHabit(true)}
-            className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>
-            Add Habit
-          </button>
-
+          <li>
+            <button onClick={() => setShowAddHabit(true)}
+              className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>
+              Add Habit
+            </button>
+          </li>
           <li className='md:ml-8 md:my-0 my-7 font-semibold'>
             <span className='text-gray-800 hover:text-blue-400 duration-500'>{curr_date}</span>
           </li>

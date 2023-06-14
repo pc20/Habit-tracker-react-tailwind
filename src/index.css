@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html{
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    --tw-gradient-from: #030712 var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(3 7 18 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+     --tw-gradient-to: #172554 var(--tw-gradient-to-position);
+}
