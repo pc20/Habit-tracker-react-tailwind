@@ -4,9 +4,9 @@ export const details = [
     { day: 'Mon', status: 'none' },
     { day: 'Tue', status: 'none' },
     { day: 'Wed', status: 'none' },
-    { day: 'Thu', status: 'none' },
+    { day: 'Thu', status: 'done' },
     { day: 'Fri', status: 'none' },
-    { day: 'Sat', status: 'none' },
+    { day: 'Sat', status: 'done' },
     { day: 'Sun', status: 'none' },
 ]
 

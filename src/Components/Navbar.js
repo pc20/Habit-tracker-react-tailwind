@@ -7,7 +7,6 @@ import AddHabit from './AddHabit.js';
 const Navbar = () => {
   let Links = [
     { name: "HOME", link: "/" },
-    { name: "ABOUT", link: "/" },
     { name: "Week View", link: "/" },
   ];
   let [open, setOpen] = useState(false);
