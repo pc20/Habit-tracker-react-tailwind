@@ -11,12 +11,14 @@ function HabitCard(props) {
     const [percentage, setPercentage] = useState('');
     const [failCount, setFailCount] = useState(0);
     const [noActionCount, setNoActionCount] = useState(0);
+
     // deleteHabit Handler
     const deleteHandler = (name) => {
         dispatch(deleteHabit(name))
     }
 
     useEffect(() => {
+        // calculate fail,done and noAction taken days
         let totalDone = 0, totalFail = 0, noActionTotal = 0;
         details.forEach(element => {
             switch (element.status) {
@@ -57,17 +59,20 @@ function HabitCard(props) {
         <div className="m-2 border text-white border-slate-200 rounded-lg hover:shadow-md hover:border-opacity-0 hover:scale-105">
             <div className="my-2 flex flex-col justify-between">
                 <h2 className="mx-2 text-left text-2xl mb-2">{title}
+                    {/* delete button */}
                     <button onClick={() => deleteHandler(title)} className=" text-red-700 text-lg px-2 align-top float-right">
                         <FaTrashAlt />
                     </button>
                 </h2>
                 <div className='p-2 italic'>{description}</div>
                 <hr className='my-1 mx-2' />
+                {/* status */}
                 <div className="p-2 flex justify-between text-xs">
-                    <span>Done: {doneCount}/7</span>
-                    <span>No Action Taken: {noActionCount}/7</span>
-                    <span>Fail: {failCount}/7</span>
+                    <span>Done: {doneCount} days</span>
+                    <span>No Action Taken: {noActionCount}days</span>
+                    <span>Fail: {failCount} days</span>
                 </div>
+                {/* progress bar */}
                 <div className=" my-1 mx-2 h-2 bg-blue-200 rounded-full">
                     <div style={{ width: percentage }}
                         className={`h-full text-center text-sm text-black bg-blue-600 rounded-full`}>

@@ -40,17 +40,20 @@ const Navbar = () => {
                 </Link>
               </li>))
           }
+          {/* add button */}
           <li>
             <button onClick={() => { setShowAddHabit(true); setOpen(false) }}
               className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>
               Add Habit
             </button>
           </li>
+          {/* todays date */}
           <li className='md:ml-8 md:my-0 my-7 font-semibold'>
             <span className='text-gray-800 hover:text-blue-400 duration-500'>{curr_date}</span>
           </li>
         </ul>
       </div>
+      {/* show Add habit */}
       <AddHabit show={showAddhabit} onClose={() => setShowAddHabit(false)} />
     </div>
   );

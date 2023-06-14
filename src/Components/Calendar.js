@@ -16,7 +16,7 @@ const Calendar = () => {
         const firstDateOfMonth = dayjs().year(curr_Year).month(curr_Month).startOf("month");
         const lastDateOfMonth = dayjs().year(curr_Year).month(curr_Month).endOf("month");
 
-        // create prefix date
+        // create prefix date // not of this month
         for (let i = 0; i < firstDateOfMonth.day(); i++) {
             const date = firstDateOfMonth.day(i);
 
@@ -27,7 +27,7 @@ const Calendar = () => {
             });
         }
 
-        // generate current date
+        // generate current month date
         for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
             let istoday = firstDateOfMonth.date(i).toDate().toDateString() === dayjs().toDate().toDateString();
             arrayOfDate.push({
@@ -40,6 +40,7 @@ const Calendar = () => {
 
         const remaining = 35 - arrayOfDate.length;
 
+        //next month date
         for (
             let i = lastDateOfMonth.date() + 1;
             i <= lastDateOfMonth.date() + remaining;
@@ -59,9 +60,11 @@ const Calendar = () => {
         <div className='text-white flex justify-center items-center'>
             <div className='w-56 h-72'>
                 <div className="flex justify-center items-center select-none font-semibold gap-2">
+                    {/* calendar icon and current month and year */}
                     <FaCalendarAlt />
                     {months[dayjs().month()]}, {dayjs().year()}
                 </div>
+                {/* headings */}
                 <div className="grid grid-cols-7 ">
                     {days.map((day, index) => {
                         return (
@@ -72,6 +75,7 @@ const Calendar = () => {
                         );
                     })}
                 </div>
+                {/* add days */}
                 <div className='w-full grid grid-cols-7'>
                     {dateArray.map(
                         ({ date, currentMonth, week, today }, index) => {
@@ -80,6 +84,7 @@ const Calendar = () => {
                                     key={index}
                                     className="p-2 text-center h-10 grid place-content-center text-sm border-t"
                                 >
+                                    {/* for current week make bg blue and for today make bg red */}
                                     <h1
                                         className={
                                             `  h-6 w-6 rounded-full grid place-content-center select-none 

@@ -8,7 +8,7 @@ function WeekView() {
   const { habits } = useSelector((state) => state.allHabits);
   const dispatch = useDispatch()
 
-  // handlers to change status on click
+  // change no action to done
   const checkStatusHandler = (info) => {
     dispatch(
       changeStatus({
@@ -23,6 +23,7 @@ function WeekView() {
     )
   }
 
+  // change done to fail
   const doneStatusHandler = (info) => {
     dispatch(
       changeStatus({
@@ -37,6 +38,7 @@ function WeekView() {
     )
   }
 
+  // change fail to no action
   const failStatusHandler = (info) => {
     dispatch(
       changeStatus({
@@ -54,6 +56,7 @@ function WeekView() {
     <div className="container mt-4">
       <div className="flex flex-col gap-5 items-center xl:items-start">
         {
+          // Iterate over habits map
           habits.map(({ title, description, details }) => (
             <div className='text-white w-4/5 border border-slate-200 rounded-lg p-4'>
               <div className='text-amber-800'>
@@ -63,6 +66,7 @@ function WeekView() {
               </div>
               <hr className='my-2 ' />
               <div className='flex flex-wrap justify-between'>
+                {/* iterate over each day status */}
                 {details.map(({ day, status }) => (
                   <div className='flex flex-col items-center md:mx-5 mx-2'>
                     <p>{day}</p>
