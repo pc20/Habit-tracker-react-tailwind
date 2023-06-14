@@ -15,13 +15,13 @@ function AddHabit(props) {
   const AddHabitHandler = () => {
     dispatch(addHabit({ title, description, details }));
     onClose();
-    navigate('/habits/details', { replace: true });
+    navigate('/habits/detail', { replace: true });
   }
 
   const handleClose = (e) => {
     if (e.target.id === 'wrapper') {
       onClose();
-      navigate('/habits/details', { replace: true });
+      navigate('/habits/detail', { replace: true });
     }
   }
   if (!show) {
@@ -53,7 +53,7 @@ function AddHabit(props) {
                 <button onClick={AddHabitHandler} type='submit' className='text-white text-center  bg-blue-400 hover:bg-blue-900
                  focus:ring-4 focus:outline-none rounded-lg px-5 py-2.5'>Add</button>
 
-                <Link to={'/habits/details'}>
+                <Link to={'/habits/detail'}>
                   <button onClick={onClose} className='text-white text-center  bg-red-400 hover:bg-red-900
                  focus:ring-4 focus:outline-none rounded-lg px-5 py-2.5'>Close</button>
                 </Link>

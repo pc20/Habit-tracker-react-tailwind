@@ -6,7 +6,6 @@ const Calendar = () => {
     const days = ["S", "M", "T", "W", "T", "F", "S"];
     const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"];
     const [dateArray, setDateArray] = useState([]);
-    const [selectDate, setSelectDate] = useState(dayjs());
 
     useEffect(() => {
         let arrayOfDate = [];
@@ -78,16 +77,9 @@ const Calendar = () => {
                                 >
                                     <h1
                                         className={
-                                            `  h-6 w-6 rounded-full grid place-content-center hover:bg-blue-600 hover:text-white transition-all 
-                                    cursor-pointer select-none ${currentMonth ? "" : "text-gray-600"}
-                                    ${today ? "bg-red-600 text-white" : ""}
-                                    ${selectDate.toDate().toDateString() === date.toDate().toDateString()
-                                                ? "bg-black text-white" : ""}`
-                                        }
-                                        onClick={() => {
-                                            setSelectDate(date);
-                                        }}
-                                    >
+                                            `  h-6 w-6 rounded-full grid place-content-center select-none 
+                                            ${currentMonth ? "" : "text-gray-600"}
+                                            ${today ? "bg-red-600 text-white" : ""}`}>
                                         {date.date()}
                                     </h1>
                                 </div>
