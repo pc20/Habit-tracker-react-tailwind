@@ -6,6 +6,8 @@ const Calendar = () => {
     const days = ["S", "M", "T", "W", "T", "F", "S"];
     const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"];
     const [dateArray, setDateArray] = useState([]);
+    var weekOfYear = require('dayjs/plugin/weekOfYear')
+    dayjs.extend(weekOfYear)
 
     useEffect(() => {
         let arrayOfDate = [];
@@ -20,18 +22,19 @@ const Calendar = () => {
 
             arrayOfDate.push({
                 currentMonth: false,
+                currentWeek: false,
                 date,
             });
         }
 
         // generate current date
         for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
+            let istoday = firstDateOfMonth.date(i).toDate().toDateString() === dayjs().toDate().toDateString();
             arrayOfDate.push({
                 currentMonth: true,
                 date: firstDateOfMonth.date(i),
-                today:
-                    firstDateOfMonth.date(i).toDate().toDateString() ===
-                    dayjs().toDate().toDateString(),
+                today: istoday,
+                week: istoday ? false : firstDateOfMonth.date(i).week() === dayjs().week()
             });
         }
 
@@ -44,10 +47,12 @@ const Calendar = () => {
         ) {
             arrayOfDate.push({
                 currentMonth: false,
+                week: false,
                 date: lastDateOfMonth.date(i),
             });
         }
         setDateArray(arrayOfDate);
+        // console.log(arrayOfDate);
     }, []);
 
     return (
@@ -69,7 +74,7 @@ const Calendar = () => {
                 </div>
                 <div className='w-full grid grid-cols-7'>
                     {dateArray.map(
-                        ({ date, currentMonth, today }, index) => {
+                        ({ date, currentMonth, week, today }, index) => {
                             return (
                                 <div
                                     key={index}
@@ -79,7 +84,8 @@ const Calendar = () => {
                                         className={
                                             `  h-6 w-6 rounded-full grid place-content-center select-none 
                                             ${currentMonth ? "" : "text-gray-600"}
-                                            ${today ? "bg-red-600 text-white" : ""}`}>
+                                            ${today ? "bg-red-600" : ""}
+                                            ${week ? "bg-blue-500" : ""}`}>
                                         {date.date()}
                                     </h1>
                                 </div>

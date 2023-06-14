@@ -7,21 +7,33 @@ function HabitCard(props) {
 
     const dispatch = useDispatch();
     const { title, description, details } = props.habit;
-    const [totalDone, setTotalDone] = useState(0);
+    const [doneCount, setDoneCount] = useState(0);
     const [percentage, setPercentage] = useState('');
-
+    const [failCount, setFailCount] = useState(0);
+    const [noActionCount, setNoActionCount] = useState(0);
     // deleteHabit Handler
     const deleteHandler = (name) => {
         dispatch(deleteHabit(name))
     }
 
     useEffect(() => {
-        let total = 0;
+        let totalDone = 0, totalFail = 0, noActionTotal = 0;
         details.forEach(element => {
-            if (element.status === 'done') total++;
+            switch (element.status) {
+                case 'none':
+                    totalDone++; break;
+                case 'done':
+                    totalFail++; break;
+                case 'fail':
+                    noActionTotal++; break;
+                default:
+                    break;
+            }
         });
-        setTotalDone(total);
-        switch (totalDone) {
+        setNoActionCount(totalDone);
+        setDoneCount(totalFail);
+        setFailCount(noActionTotal);
+        switch (doneCount) {
             case 1:
                 setPercentage('14%'); break;
             case 2:
@@ -34,10 +46,12 @@ function HabitCard(props) {
                 setPercentage('71%'); break;
             case 6:
                 setPercentage('86%'); break;
+            case 7:
+                setPercentage("100%"); break;
             default:
-                setPercentage('100%'); break;
+                setPercentage('0%'); break;
         }
-    }, [details, totalDone]);
+    }, [details, doneCount, failCount, noActionCount]);
 
     return (
         <div className="m-2 border text-white border-slate-200 rounded-lg hover:shadow-md hover:border-opacity-0 hover:scale-105">
@@ -49,9 +63,10 @@ function HabitCard(props) {
                 </h2>
                 <div className='p-2 italic'>{description}</div>
                 <hr className='my-1 mx-2' />
-                <div className="p-2 flex justify-between text-sm">
-                    <span>Task Completed: {totalDone} Days</span>
-                    <span>Done % : {percentage}</span>
+                <div className="p-2 flex justify-between text-xs">
+                    <span>Done: {doneCount}/7</span>
+                    <span>No Action Taken: {noActionCount}/7</span>
+                    <span>Fail: {failCount}/7</span>
                 </div>
                 <div className=" my-1 mx-2 h-2 bg-blue-200 rounded-full">
                     <div style={{ width: percentage }}
